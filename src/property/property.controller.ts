@@ -29,20 +29,7 @@ export class PropertyController {
     }
 
     @Put()
-    async update() {
-        // let propertyExample = new Property();
-
-        const property: any = {
-            typeId: 3,
-            holderId: 1,
-            title: '222',
-            invNumber: 1,
-            quantity: 1,
-            dateCome: new Date(Date.now()),
-            dateCheck: new Date(Date.now()),
-            timeToLive: new Date(Date.now())
-        };
-
-        return this.propertyService.update(property, 2);
+    async update(@Body() property: any, @Param('id') id: number) {
+        return this.propertyService.update(property, id);
     }
 }

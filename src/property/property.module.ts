@@ -5,8 +5,7 @@ import { Property } from './property.entity';
 import { PropertyService } from './property.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Property]),
-    ],
+    imports: [TypeOrmModule.forFeature([Property])],
     providers: [PropertyService],
     controllers: [PropertyController],
     exports: [PropertyService]

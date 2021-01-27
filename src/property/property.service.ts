@@ -10,6 +10,14 @@ export class PropertyService {
     private readonly manager = getManager();
     private readonly nowMs = Date.now();
 
+    // Utilities workers
+
+    private objectMerger(target: Property): Property {
+        return Object.assign(new Property(), target);
+    }
+
+    // Service workers
+
     public async findAll(): Promise<Property[]> {
         return await this.manager.find(Property);
     }
@@ -19,11 +27,11 @@ export class PropertyService {
     }
 
     public async save(property: Property): Promise<Property> {
-        return await this.manager.save(Object.assign(new Property(), property));
+        return await this.manager.save(this.objectMerger(property));
     }
 
     public async update(property: any, id: number): Promise<any> {
-        return this.manager.update(Property, id, property);
+        return this.manager.update(Property, id, this.objectMerger(property));
     }
 
     public async needToBeOperated(): Promise<Property[]> {

@@ -1,0 +1,38 @@
+import { Injectable } from "@nestjs/common";
+import { getManager, Between } from "typeorm";
+import { Property } from "./property.entity";
+
+import { day } from './../utils/timeStamps';
+
+@Injectable()
+export class PropertyService {
+
+    private readonly manager = getManager();
+    private readonly nowMs = Date.now();
+
+    public async findAll(): Promise<Property[]> {
+        return await this.manager.find(Property);
+    }
+
+    public async findOne(id: number): Promise<Property> {
+        return await this.manager.findOne(Property, id);
+    }
+
+    public async save(property: Property): Promise<Property> {
+        return await this.manager.save(Object.assign(new Property(), property));
+    }
+
+    public async update(property: any, id: number): Promise<any> {
+        return this.manager.update(Property, id, property);
+    }
+
+    public async needToBeOperated(): Promise<Property[]> {
+        return this.manager.find(Property,
+            {
+                where:
+                {
+                    dateCheck: Between(new Date(this.nowMs), new Date(this.nowMs + 7 * day),)
+                }
+            })
+    }
+}

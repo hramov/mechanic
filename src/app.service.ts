@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PropertyService } from './property/property.service';
+import { PropertyService } from './modules/property/property.service';
 
 @Injectable()
 export class AppService {

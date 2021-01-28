@@ -2,8 +2,6 @@ import { Controller, Get, Post, Body, Param, Put } from "@nestjs/common";
 import { Property } from "./property.entity";
 import { PropertyService } from "./property.service";
 
-import { day, year } from './../utils/timeStamps';
-
 @Controller('property')
 export class PropertyController {
     constructor(private readonly propertyService: PropertyService) { }

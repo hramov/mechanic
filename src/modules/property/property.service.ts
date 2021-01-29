@@ -19,13 +19,13 @@ export class PropertyService {
     // Service workers
 
     public async findAll(): Promise<Property[]> {
-        const data = await this.manager.find(Property);
+        const data = await this.manager.find(Property, { relations: ["department", "station", "type"], order: { dateCheck: 'ASC' } });
         console.log(data);
         return data;
     }
 
     public async findOne(id: number): Promise<Property> {
-        return await this.manager.findOne(Property, id);
+        return await this.manager.findOne(Property, id, { relations: ["department", "station", "type"] });
     }
 
     public async save(property: Property): Promise<Property> {

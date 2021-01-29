@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Auth } from './auth.entity';
 import { Department } from './department.entity';
 import { PhoneBook } from './phoneBook.entity';
@@ -8,17 +8,26 @@ export class Station {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Department)
-    @JoinColumn()
-    department: Department | number;
+    @ManyToOne(() => Department, department => department.id)
+    @JoinColumn({ name: 'departmentId' })
+    department: Department;
 
-    @OneToOne(() => Auth)
-    @JoinColumn()
-    worker: Auth | number;
+    @ManyToOne(() => Auth, auth => auth.id)
+    @JoinColumn({ name: 'workerId' })
+    worker: Auth;
 
     @OneToOne(() => PhoneBook)
-    @JoinColumn()
-    phone: PhoneBook | number;
+    @JoinColumn({ name: 'phoneId' })
+    phone: PhoneBook;
+
+    @Column()
+    departmentId: number;
+
+    @Column()
+    workerId: number;
+
+    @Column()
+    phoneId: number;
 
     @Column()
     position: string;

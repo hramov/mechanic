@@ -9,11 +9,25 @@ export class Property {
     id: number;
 
     @OneToOne(() => Device)
-    @JoinColumn()
+    @JoinColumn({ name: 'deviceId' })
     type: Device;
 
     @ManyToOne(() => Department, department => department.id)
-    holder: Department;
+    @JoinColumn({ name: 'departmentId' })
+    department: Department;
+
+    @ManyToOne(() => Station, station => station.id)
+    @JoinColumn({ name: 'stationId' })
+    station: Station;
+
+    @Column()
+    deviceId: number;
+
+    @Column()
+    departmentId: number;
+
+    @Column()
+    stationId: number;
 
     @Column()
     title: string;
@@ -35,7 +49,4 @@ export class Property {
 
     @Column()
     timeToLive: Date;
-
-    @ManyToOne(() => Station, station => station.id)
-    station: Station;
 }

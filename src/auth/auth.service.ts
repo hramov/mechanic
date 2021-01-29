@@ -19,15 +19,10 @@ export class AuthService {
     }
 
     async register(registerData: RegisterDataDto) {
-        return await this.manager.save(Object.assign(new Auth(), {
-            positionId: Number(1),
-            departmentId: 1,
-            name: '12345',
-            lastName: '123',
-            otherName: '123',
-            login: '123',
-            password: new Buffer('123').toString('base64'),
-            phone: '123'
-        }));
+        const reg = Object.assign(new Auth(), registerData);
+        reg.departmentId = registerData.departmentId;
+        reg.positionId = registerData.positionId;
+        console.log(reg);
+        return await this.manager.save(Auth, reg);
     }
 }

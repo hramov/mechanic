@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Department } from './department.entity';
 import { Position } from './position.entity';
+import { Station } from './station.entity';
 
 @Entity({ name: 'auth' })
 export class Auth {
@@ -9,10 +10,18 @@ export class Auth {
     id: number;
 
     @ManyToOne(() => Position, position => position.id)
+    @JoinColumn({ name: 'positionId' })
     position: Position;
 
     @ManyToOne(() => Department, department => department.id)
+    @JoinColumn({ name: 'departmentId' })
     department: Department;
+
+    @Column()
+    positionId: number;
+
+    @Column()
+    departmentId: number;
 
     @Column()
     name: string;

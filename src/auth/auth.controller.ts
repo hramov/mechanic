@@ -29,7 +29,9 @@ export class AuthController {
 
     @Post('register')
     async register(@Body() registerData: RegisterDataDto) {
-        registerData.password = new Buffer(registerData.password).toString('base64');
+        registerData.positionId = Number(registerData.positionId);
+        registerData.departmentId = Number(registerData.departmentId);
+        registerData.password = Buffer.from(registerData.password).toString('base64').toString();
         return await this.authService.register(registerData);
     }
 

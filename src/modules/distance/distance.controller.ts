@@ -11,12 +11,9 @@ export class DistanceController {
     @Get()
     async getStations() {
         const stations = await this.distanceService.getStations();
-
-        // console.log(stations);
-        // for (let i = 0; i < stations.length; i++) {
-        //     stations[i].worker.position = await this.distanceService.getWorkerPosition(stations[i].worker.id);
-        // }
-        // console.log(stations);
+        for (let i = 0; i < stations.length; i++) {
+            stations[i].worker.position = await this.distanceService.getWorkerPosition(stations[i].worker.positionId);
+        }
         return stations;
     }
 

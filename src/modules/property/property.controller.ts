@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Put } from "@nestjs/common";
-import { Property } from "./property.entity";
+import { Property } from './../../database/entities/property.entity';
 import { PropertyService } from "./property.service";
 
 @Controller('property')
@@ -26,8 +26,8 @@ export class PropertyController {
         return this.propertyService.save(property);
     }
 
-    @Put()
-    async update(@Body() property: any, @Param('id') id: number) {
+    @Put(':id')
+    async update(@Param('id') id: number, @Body() property: any) {
         return this.propertyService.update(property, id);
     }
 }

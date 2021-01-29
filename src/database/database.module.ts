@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Property } from './../modules/property/property.entity';
-import { Station } from '../auth/entities/station.entity';
-import { Auth } from './../auth/entities/auth.entity';
-import { Department } from './../auth/entities/department.entity';
+import { Property } from './entities/property.entity';
+import { Station } from './entities/station.entity';
+import { Auth } from './entities/auth.entity';
+import { Department } from './entities/department.entity';
+import { Position } from './entities/position.entity';
+import { Device } from './entities/device.entity';
+import { PhoneBook } from './entities/phoneBook.entity';
 
 @Module({
     imports: [TypeOrmModule.forRoot({
@@ -13,7 +16,7 @@ import { Department } from './../auth/entities/department.entity';
         username: 'postgres',
         password: 'postgres',
         database: 'mechanic',
-        entities: [Property, Station, Department, Auth],
+        entities: [Property, Station, Auth, Position, Department, Device, PhoneBook],
         synchronize: true,
     }),
     ]

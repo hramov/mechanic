@@ -1,11 +1,16 @@
 import { Controller, Get, Post, Body, Param, Put } from "@nestjs/common";
 import { LoginDataDto, RegisterDataDto } from "./authData.dto";
 import { AuthService } from './auth.service';
-import { Auth } from "./entities/auth.entity";
+import { Auth } from './../database/entities/auth.entity';
 
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
+
+    @Get()
+    async getUsers() {
+        return await this.authService.getUsers();
+    }
 
     @Post('login')
     async login(@Body() loginData: LoginDataDto) {

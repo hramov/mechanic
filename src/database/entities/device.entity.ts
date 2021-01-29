@@ -1,13 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Station {
+@Entity({ name: 'device' })
+export class Device {
+
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     title: string;
 
-    @Column()
-    holderId: number;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { getManager, Between } from "typeorm";
-import { Property } from "./property.entity";
+import { getManager, Between, UpdateResult } from "typeorm";
+import { Property } from './../../database/entities/property.entity';
 
 import { day } from './../../utils/timeStamps';
 
@@ -32,7 +32,7 @@ export class PropertyService {
         return await this.manager.save(this.objectMerger(property));
     }
 
-    public async update(property: any, id: number): Promise<any> {
+    public async update(property: any, id: number): Promise<UpdateResult> {
         return this.manager.update(Property, id, this.objectMerger(property));
     }
 

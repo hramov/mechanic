@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { Position } from "src/database/entities/position.entity";
 import { Station } from "src/database/entities/station.entity";
 import { DeleteResult, getManager, UpdateResult } from "typeorm";
-import { StationDataDto } from "./station-data.dto";
 
 @Injectable()
 export class DistanceService {
@@ -20,11 +19,11 @@ export class DistanceService {
         return await this.manager.findOne(Station, { where: { id: id } });
     }
 
-    async addStation(stationData: StationDataDto): Promise<StationDataDto> {
+    async addStation(stationData: Station): Promise<Station> {
         return await this.manager.save(Object.assign(new Station(), stationData));
     }
 
-    async editStation(id: number, stationData: StationDataDto): Promise<UpdateResult> {
+    async editStation(id: number, stationData: Station): Promise<UpdateResult> {
         return await this.manager.update(Station, id, stationData);
     }
 

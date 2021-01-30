@@ -6,8 +6,8 @@ import { Property } from './database/entities/property.entity';
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  // @Get('/')
-  // getHello(): Promise<Property[]> {
-  //   return this.appService.getHello();
-  // }
+  @Get('/')
+  getHello(): string {
+    return "123";
+  }
 }

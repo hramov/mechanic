@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put } from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { DistanceService } from "../distance/distance.service";
 import { Property } from './../../database/entities/property.entity';
 import { PropertyService } from "./property.service";
@@ -29,13 +29,18 @@ export class PropertyController {
         return this.propertyService.getSingleProperty(id);
     }
 
-    @Post()
-    async saveProperty(@Body() property: Property) {
-        return this.propertyService.saveProperty(property);
-    }
+    // @Post()
+    // async saveProperty(@Body() property: Property) {
+    //     return this.propertyService.saveProperty(property);
+    // }
 
-    @Put(':id')
-    async updateProperty(@Param('id') id: number, @Body() property: any) {
-        return this.propertyService.updateProperty(property, id);
-    }
+    // @Put(':id')
+    // async updateProperty(@Param('id') id: number, @Body() property: any) {
+    //     return this.propertyService.updateProperty(property, id);
+    // }
+
+    // @Delete(':id')
+    // async deleteProperty(@Param('id') id: number): Promise<DeleteResult> {
+    //     return await this.propertyService.deleteProperty(id);
+    // }
 }

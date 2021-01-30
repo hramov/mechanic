@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { DistanceModule } from './modules/distance/distance.module';
 import { DocsModule } from './modules/docs/docs.module';
 import { WorkModule } from './modules/work/work.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { WorkModule } from './modules/work/work.module';
     AuthModule,
     DistanceModule,
     DocsModule,
-    WorkModule
+    WorkModule,
+    AdminModule
   ],
   providers: [AppService],
   controllers: [AppController]

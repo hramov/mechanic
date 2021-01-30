@@ -27,18 +27,18 @@ export class DistanceController {
         return station;
     }
 
-    @Post('station')
-    async addStation(@Body() stationData: StationDataDto) {
-        return await this.distanceService.addStation(stationData);
-    }
+    // @Post('station')
+    // async addStation(@Body() stationData: StationDataDto) {
+    //     return await this.distanceService.addStation(stationData);
+    // }
 
-    @Put('station/:id')
-    async editStation(@Param() id: number, @Body() stationData: StationDataDto) {
-        return await this.distanceService.editStation(id, stationData);
-    }
+    // @Put('station/:id')
+    // async editStation(@Param() id: number, @Body() stationData: StationDataDto) {
+    //     return await this.distanceService.editStation(id, stationData);
+    // }
 
-    @Delete(':id')
-    async deleteStation(@Param() id: number): Promise<DeleteResult> {
-        return await this.distanceService.deleteStation(id);
-    }
+    // @Delete(':id')
+    // async deleteStation(@Param() id: number): Promise<DeleteResult> {
+    //     return await this.distanceService.deleteStation(id);
+    // }
 }

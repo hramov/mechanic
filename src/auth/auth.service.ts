@@ -15,7 +15,7 @@ export class AuthService {
     }
 
     async login(loginData: LoginDataDto) {
-        return await this.manager.findOne(Auth, { login: loginData.login, password: new Buffer(loginData.password).toString('base64') });
+        return await this.manager.findOne(Auth, { where: { login: loginData.login, password: new Buffer(loginData.password).toString('base64') }, relations: ["position", "department"] });
     }
 
     async register(registerData: RegisterDataDto) {

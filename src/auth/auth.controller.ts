@@ -14,6 +14,7 @@ export class AuthController {
 
     @Post('login')
     async login(@Body() loginData: LoginDataDto) {
+        console.log(loginData);
         const user: Auth = await this.authService.login(loginData);
         if (!user) {
             return {
@@ -21,6 +22,12 @@ export class AuthController {
                 message: 'User not found'
             }
         }
+
+        delete user.login;
+        delete user.password;
+        delete user.positionId;
+        delete user.departmentId;
+
         return {
             token: Date.now(),
             user: user
@@ -29,8 +36,6 @@ export class AuthController {
 
     @Post('register')
     async register(@Body() registerData: RegisterDataDto) {
-        registerData.positionId = Number(registerData.positionId);
-        registerData.departmentId = Number(registerData.departmentId);
         registerData.password = Buffer.from(registerData.password).toString('base64').toString();
         return await this.authService.register(registerData);
     }

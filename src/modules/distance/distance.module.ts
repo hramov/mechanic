@@ -7,12 +7,15 @@ import { PhoneBook } from 'src/database/entities/phoneBook.entity';
 import { Position } from 'src/database/entities/position.entity';
 import { Property } from 'src/database/entities/property.entity';
 import { Station } from 'src/database/entities/station.entity';
+import { PropertyService } from '../property/property.service';
 import { DistanceController } from './distance.controller';
 import { DistanceService } from './distance.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Station, Auth, Position, Department, PhoneBook, Device, Property])],
+    imports: [TypeOrmModule.forFeature([Station, Auth, Position, Department, PhoneBook, Device, Property]),
+        PropertyService],
     controllers: [DistanceController],
-    providers: [DistanceService]
+    providers: [DistanceService, PropertyService],
+    exports: [DistanceService]
 })
 export class DistanceModule { }

@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { Position } from "src/database/entities/position.entity";
-import { Property } from "src/database/entities/property.entity";
 import { Station } from "src/database/entities/station.entity";
 import { DeleteResult, getManager, UpdateResult } from "typeorm";
 import { StationDataDto } from "./station-data.dto";
@@ -14,18 +13,11 @@ export class DistanceService {
     }
 
     async getWorkerPosition(id: number): Promise<Position> {
-        const position = await this.manager.findOne(Position, { where: { id: id } });
-        return position;
-    }
-
-    async getPropertyCount(id: number): Promise<number> {
-        const result = await this.manager.count(Property, { where: { stationId: id } });
-        console.log(result);
-        return result;
+        return await this.manager.findOne(Position, { where: { id: id } });
     }
 
     async getSingleStation(id: number): Promise<Station> {
-        return await this.manager.findOne(Station, { id: id });
+        return await this.manager.findOne(Station, { where: { id: id } });
     }
 
     async addStation(stationData: StationDataDto): Promise<StationDataDto> {

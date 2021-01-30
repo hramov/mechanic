@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { getManager, Between, UpdateResult } from "typeorm";
+import { getManager, Between, UpdateResult, DeleteResult } from "typeorm";
 import { Property } from './../../database/entities/property.entity';
 
 import { day } from './../../utils/timeStamps';
+import ObjectMerger from './../../utils/objectMerger';
 
 @Injectable()
 export class PropertyService {
@@ -10,41 +11,48 @@ export class PropertyService {
     private readonly manager = getManager();
     private readonly nowMs = Date.now();
 
-    // Utilities workers
+    /** Classic CRUD methods */
 
-    private objectMerger(target: Property): Property {
-        return Object.assign(new Property(), target);
-    }
-
-    // Service workers
-
-    public async findAll(): Promise<Property[]> {
+    public async getProperty(): Promise<Property[]> {
         const data = await this.manager.find(Property, { relations: ["department", "station", "device"], order: { dateCheck: 'ASC' } });
-        console.log(data);
         return data;
     }
 
-    public async findOne(id: number): Promise<Property> {
+    public async getSingleProperty(id: number): Promise<Property> {
         return await this.manager.findOne(Property, id, { relations: ["department", "station", "device"] });
     }
 
-    public async save(property: Property): Promise<Property> {
-        return await this.manager.save(this.objectMerger(property));
+    public async saveProperty(property: Property): Promise<Property> {
+        return await this.manager.save(Object.assign(new Property(), property));
     }
 
-    public async update(property: any, id: number): Promise<UpdateResult> {
-        return this.manager.update(Property, id, this.objectMerger(property));
+    public async updateProperty(property: any, id: number): Promise<UpdateResult> {
+        return this.manager.update(Property, id, Object.assign(new Property(), property));
+    }
+
+    public async deleteProperty(id: number): Promise<DeleteResult> {
+        return await this.manager.delete(Property, id);
+    }
+
+    /** Methods for external modules */
+
+    public async getPropertyForSingleStationCount(id: number): Promise<number> {
+        const result = await this.manager.count(Property, { where: { stationId: id } });
+        return result;
+    }
+
+    public async getPropertyForSingleStation(id: number): Promise<Property[]> {
+        const result = await this.manager.find(Property, { where: { stationId: id } });
+        return result;
     }
 
     public async needToBeOperated(): Promise<Property[]> {
-        const data = this.manager.find(Property,
+        return await this.manager.find(Property,
             {
                 where:
                 {
                     dateCheck: Between(new Date(this.nowMs), new Date(this.nowMs + 7 * day),)
                 }
             })
-        console.log(data);
-        return data;
     }
 }

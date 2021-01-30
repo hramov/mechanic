@@ -10,7 +10,10 @@ export class Station {
     id: number;
 
     @OneToMany(() => Property, property => property.stationId)
-    property: number;
+    propertyCount: number;
+
+    @OneToMany(() => Property, property => property.stationId)
+    property: Property[];
 
     @ManyToOne(() => Department, department => department.id)
     @JoinColumn({ name: 'departmentId' })

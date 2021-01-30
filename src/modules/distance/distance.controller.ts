@@ -13,6 +13,7 @@ export class DistanceController {
         const stations = await this.distanceService.getStations();
         for (let i = 0; i < stations.length; i++) {
             stations[i].worker.position = await this.distanceService.getWorkerPosition(stations[i].worker.positionId);
+            stations[i].property = await this.distanceService.getPropertyCount(stations[i].id);
         }
         return stations;
     }

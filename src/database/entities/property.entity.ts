@@ -10,7 +10,7 @@ export class Property {
 
     @OneToOne(() => Device)
     @JoinColumn({ name: 'deviceId' })
-    type: Device;
+    device: Device;
 
     @ManyToOne(() => Department, department => department.id)
     @JoinColumn({ name: 'departmentId' })

@@ -1,12 +1,16 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Auth } from './auth.entity';
 import { Department } from './department.entity';
 import { PhoneBook } from './phoneBook.entity';
+import { Property } from './property.entity';
 
 @Entity({ name: 'station' })
 export class Station {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @OneToMany(() => Property, property => property.stationId)
+    property: number;
 
     @ManyToOne(() => Department, department => department.id)
     @JoinColumn({ name: 'departmentId' })

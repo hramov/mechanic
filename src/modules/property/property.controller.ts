@@ -9,7 +9,6 @@ export class PropertyController {
     @Get()
     async findAll(): Promise<Property[]> {
         const result = await this.propertyService.findAll();
-
         return result;
     }
 

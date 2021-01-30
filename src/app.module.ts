@@ -17,7 +17,7 @@ import { AdminModule } from './admin/admin.module';
     DistanceModule,
     DocsModule,
     WorkModule,
-    AdminModule
+    AdminModule,
   ],
   providers: [AppService],
   controllers: [AppController]

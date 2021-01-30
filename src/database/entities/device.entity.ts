@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Property } from './property.entity';
 
 @Entity({ name: 'device' })
 export class Device {
@@ -9,4 +10,7 @@ export class Device {
     @Column()
     title: string;
 
+    @OneToMany(() => Property, property => property.deviceId)
+    @JoinColumn({ name: 'property' })
+    property: Property[]
 }

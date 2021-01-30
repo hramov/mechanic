@@ -6,7 +6,6 @@ import { Auth } from './entities/auth.entity';
 import { Department } from './entities/department.entity';
 import { Position } from './entities/position.entity';
 import { Device } from './entities/device.entity';
-import { PhoneBook } from './entities/phoneBook.entity';
 
 @Module({
     imports: [TypeOrmModule.forRoot({
@@ -16,7 +15,7 @@ import { PhoneBook } from './entities/phoneBook.entity';
         username: 'postgres',
         password: 'postgres',
         database: 'mechanic',
-        entities: [Property, Station, Auth, Position, Department, Device, PhoneBook],
+        entities: [Property, Station, Auth, Position, Department, Device],
         synchronize: true,
     }),
     ]

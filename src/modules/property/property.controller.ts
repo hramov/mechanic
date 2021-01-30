@@ -29,6 +29,11 @@ export class PropertyController {
         return this.propertyService.getSingleProperty(id);
     }
 
+    @Get('station/:id')
+    async getPropertyForStation(@Param('id') id: number): Promise<Property[]> {
+        return this.propertyService.getPropertyForSingleStation(id);
+    }
+
     // @Post()
     // async saveProperty(@Body() property: Property) {
     //     return this.propertyService.saveProperty(property);

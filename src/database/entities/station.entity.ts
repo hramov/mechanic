@@ -1,7 +1,6 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Auth } from './auth.entity';
 import { Department } from './department.entity';
-import { PhoneBook } from './phoneBook.entity';
 import { Property } from './property.entity';
 
 @Entity({ name: 'station' })
@@ -23,10 +22,6 @@ export class Station {
     @JoinColumn({ name: 'workerId' })
     worker: Auth;
 
-    @OneToOne(() => PhoneBook)
-    @JoinColumn({ name: 'phoneId' })
-    phone: PhoneBook;
-
     @Column()
     departmentId: number;
 
@@ -34,7 +29,10 @@ export class Station {
     workerId: number;
 
     @Column()
-    phoneId: number;
+    ots: string;
+
+    @Column()
+    obts: string;
 
     @Column()
     position: string;

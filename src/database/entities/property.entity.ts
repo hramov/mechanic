@@ -8,7 +8,7 @@ export class Property {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Device)
+    @ManyToOne(() => Device)
     @JoinColumn({ name: 'deviceId' })
     device: Device;
 

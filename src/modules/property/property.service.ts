@@ -42,7 +42,7 @@ export class PropertyService {
     }
 
     public async getPropertyForSingleStation(id: number): Promise<Property[]> {
-        const result = await this.manager.find(Property, { where: { stationId: id } });
+        const result = await this.manager.find(Property, { where: { stationId: id }, relations: ["department", "station", "device"] });
         return result;
     }
 

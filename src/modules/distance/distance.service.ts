@@ -8,7 +8,7 @@ export class DistanceService {
     private readonly manager = getManager();
 
     async getStations(): Promise<Station[]> {
-        return await this.manager.find(Station, { relations: ["worker", "phone", "department"] });
+        return await this.manager.find(Station, { relations: ["worker", "department"], order: { position: 'ASC' } });
     }
 
     async getWorkerPosition(id: number): Promise<Position> {

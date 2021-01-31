@@ -24,4 +24,8 @@ export class AdminService {
     public async getDevices(): Promise<Device[]> {
         return await this.manager.find(Device);
     }
+
+    public async addDevice(deviceData: Device): Promise<Device> {
+        return await this.manager.save(Object.assign(new Device(), deviceData));
+    }
 }

@@ -24,7 +24,14 @@ export class DistanceService {
     }
 
     async editStation(id: number, stationData: Station): Promise<UpdateResult> {
-        return await this.manager.update(Station, id, stationData);
+        return await this.manager.update(Station, id, {
+            title: stationData.title,
+            departmentId: stationData.departmentId,
+            position: stationData.position,
+            workerId: stationData.workerId,
+            ots: stationData.ots,
+            obts: stationData.obts
+        });
     }
 
     async deleteStation(id: number): Promise<DeleteResult> {

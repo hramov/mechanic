@@ -33,6 +33,9 @@ export class Property {
     title: string;
 
     @Column()
+    description: string;
+
+    @Column()
     location: string;
 
     @Column()

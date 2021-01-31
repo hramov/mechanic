@@ -29,8 +29,18 @@ export class PropertyService {
         return this.manager.update(Property, id,
             {
                 title: property.title,
-                dateCheck: property.dateCheck
-            });
+                deviceId: property.deviceId,
+                departmentId: property.departmentId,
+                description: property.description,
+                stationId: property.stationId,
+                location: property.location,
+                invNumber: property.invNumber,
+                quantity: property.quantity,
+                dateCome: property.dateCome,
+                dateCheck: property.dateCheck,
+                timeToLive: property.timeToLive
+            }
+        );
     }
 
     public async deleteProperty(id: number): Promise<DeleteResult> {

@@ -67,8 +67,10 @@ export class AdminController {
     async createProperty(@Body() propertyData: Property): Promise<Property> {
         return await this.propertyService.saveProperty(propertyData);
     }
-    @Put('property')
-    async editProperty(@Param('id') id: number, @Body() propertyData: Property): Promise<UpdateResult> {
+    @Put('property/:id')
+    async editProperty(@Param('id') id: number, @Body() propertyData: Property) {
+        console.log(id);
+        console.log(propertyData);
         return await this.propertyService.updateProperty(propertyData, id);
     }
     @Delete('property')

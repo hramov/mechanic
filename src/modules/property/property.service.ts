@@ -3,7 +3,6 @@ import { getManager, Between, UpdateResult, DeleteResult } from "typeorm";
 import { Property } from './../../database/entities/property.entity';
 
 import { day } from './../../utils/timeStamps';
-import ObjectMerger from './../../utils/objectMerger';
 
 @Injectable()
 export class PropertyService {
@@ -26,8 +25,12 @@ export class PropertyService {
         return await this.manager.save(Object.assign(new Property(), property));
     }
 
-    public async updateProperty(property: any, id: number): Promise<UpdateResult> {
-        return this.manager.update(Property, id, Object.assign(new Property(), property));
+    public async updateProperty(property: Property, id: number): Promise<UpdateResult> {
+        return this.manager.update(Property, id,
+            {
+                title: property.title,
+                dateCheck: property.dateCheck
+            });
     }
 
     public async deleteProperty(id: number): Promise<DeleteResult> {

@@ -13,7 +13,7 @@ export class PropertyService {
     /** Classic CRUD methods */
 
     public async getProperty(): Promise<Property[]> {
-        const data = await this.manager.find(Property, { relations: ["department", "station", "device"], order: { dateCheck: 'ASC' } });
+        const data = await this.manager.find(Property, { relations: ["department", "station", "device"], order: { stationId: 'ASC' } });
         return data;
     }
 
@@ -65,7 +65,8 @@ export class PropertyService {
                 where:
                 {
                     dateCheck: Between(new Date(this.nowMs), new Date(this.nowMs + 7 * day),)
-                }
+                },
+                relations: ["department", "station", "device"], order: { dateCheck: 'ASC' }
             })
     }
 }

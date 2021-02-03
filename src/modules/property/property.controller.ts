@@ -26,12 +26,13 @@ export class PropertyController {
 
     @Get(':id')
     async getSingleProperty(@Param('id') id: number): Promise<Property> {
-        return this.propertyService.getSingleProperty(id);
+        const result = await this.propertyService.getSingleProperty(id);
+        return result;
     }
 
     @Get('station/:id')
     async getPropertyForStation(@Param('id') id: number): Promise<Property[]> {
-        return this.propertyService.getPropertyForSingleStation(id);
+        return await this.propertyService.getPropertyForSingleStation(id);
     }
 
     // @Post()

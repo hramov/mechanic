@@ -18,7 +18,8 @@ export class PropertyService {
     }
 
     public async getSingleProperty(id: number): Promise<Property> {
-        return await this.manager.findOne(Property, id, { relations: ["department", "station", "device"] });
+        const result = await this.manager.findOne(Property, id, { relations: ["department", "station", "device"] });
+        return result;
     }
 
     public async saveProperty(property: Property): Promise<Property> {

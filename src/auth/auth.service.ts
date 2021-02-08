@@ -14,6 +14,11 @@ export class AuthService {
         return users;
     }
 
+    async getSingleEmployee(id: number): Promise<Auth> {
+        const user = await this.manager.findOne(Auth, { where: { id: id }, relations: ["position", "department"] });
+        return user;
+    }
+
     async login(loginData: LoginDataDto) {
         return await this.manager.findOne(Auth, { where: { login: loginData.login, password: new Buffer(loginData.password).toString('base64') }, relations: ["position", "department"] });
     }

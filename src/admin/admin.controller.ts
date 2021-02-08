@@ -47,11 +47,11 @@ export class AdminController {
     async createStation(@Body() stationData: Station): Promise<Station> {
         return await this.distanceService.addStation(stationData);
     }
-    @Put('distance')
+    @Put('distance/:id')
     async editStation(@Param('id') id: number, @Body() stationData: Station): Promise<UpdateResult> {
         return await this.distanceService.editStation(id, stationData);
     }
-    @Delete('distance')
+    @Delete('distance/:id')
     async deleteStation(@Param('id') id: number): Promise<DeleteResult> {
         return await this.distanceService.deleteStation(id);
     }
@@ -82,6 +82,11 @@ export class AdminController {
     @Get('employee')
     async getEmployees(): Promise<Auth[]> {
         return await this.authService.getUsers();
+    }
+
+    @Get('employee/:id')
+    async getSingleEmployee(@Param('id') id: number): Promise<Auth> {
+        return await this.authService.getSingleEmployee(id);
     }
 
     @Post('employee')

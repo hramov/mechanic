@@ -73,7 +73,7 @@ export class AdminController {
         console.log(propertyData);
         return await this.propertyService.updateProperty(propertyData, id);
     }
-    @Delete('property')
+    @Delete('property/:id')
     async deleteProperty(@Param('id') id: number): Promise<DeleteResult> {
         return await this.propertyService.deleteProperty(id);
     }

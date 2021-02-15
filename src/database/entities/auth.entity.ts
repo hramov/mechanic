@@ -9,11 +9,11 @@ export class Auth {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Position, position => position.id)
+    @ManyToOne(() => Position, position => position.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'positionId' })
     position: Position;
 
-    @ManyToOne(() => Department, department => department.id)
+    @ManyToOne(() => Department, department => department.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'departmentId' })
     department: Department;
 

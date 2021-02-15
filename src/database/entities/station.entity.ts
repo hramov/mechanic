@@ -11,14 +11,14 @@ export class Station {
     @OneToMany(() => Property, property => property.stationId)
     propertyCount: number;
 
-    @OneToMany(() => Property, property => property.stationId)
+    @OneToMany(() => Property, property => property.stationId, { cascade: true })
     property: Property[];
 
-    @ManyToOne(() => Department, department => department.id)
+    @ManyToOne(() => Department, department => department.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'departmentId' })
     department: Department;
 
-    @ManyToOne(() => Auth, auth => auth.id)
+    @ManyToOne(() => Auth, auth => auth.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'workerId' })
     worker: Auth;
 

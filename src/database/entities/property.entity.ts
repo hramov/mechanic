@@ -16,7 +16,7 @@ export class Property {
     @JoinColumn({ name: 'departmentId' })
     department: Department;
 
-    @ManyToOne(() => Station, station => station.id)
+    @ManyToOne(() => Station, station => station.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'stationId' })
     station: Station;
 
@@ -53,6 +53,6 @@ export class Property {
     @Column()
     timeToLive: Date;
 
-    @Column()
+    @Column({ nullable: true })
     image: string;
 }
